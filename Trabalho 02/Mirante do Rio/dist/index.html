@@ -58,13 +58,26 @@ const gltfLoader = new THREE.GLTFLoader();
 // Luzes
 
 // Luz ambiente para todo cenário
-var hLight = new THREE.AmbientLight(new THREE.Color(0xFFFFFF), 0.1);
-scene.add(hLight);
-hLight.castShadow = false;
+//var hLight = new THREE.AmbientLight(new THREE.Color(0xFFFFFF), 0.1);
+//scene.add(hLight);
+//hLight.castShadow = false;
 
 // Luz Direcional
-//var directionalLight = new THREE.DirectionalLight(new THREE.Color(0xFFFFFF), 1);
-
+var directionalLight = new THREE.DirectionalLight(new THREE.Color(0xFFFFFF), 1);
+directionalLight.target.position.set(0,1,-5);
+directionalLight.position.set(0,100,0);
+directionalLight.shadow.camera.zoom = 0.1;
+directionalLight.shadow.mapSize.width = 2048;
+directionalLight.shadow.mapSize.height = 2048;
+directionalLight.castShadow = true;
+var ajudante3 = new THREE.DirectionalLightHelper(directionalLight);
+scene.add(directionalLight.target)
+scene.add(directionalLight);
+scene.add(ajudante3);
+var ajudante4 = new THREE.CameraHelper(directionalLight.shadow.camera);
+scene.add(ajudante4);
+//var ajudante4 = new THREE.CameraHelper(direcLight.shadow.camera);
+//scene.add(ajudante4);
 // Luz de ponto
 /*
 var spotLight = new THREE.SpotLight(new THREE.Color(0xFFFFFF), 1);
@@ -85,13 +98,13 @@ var ajudante4 = new THREE.CameraHelper(spotLight.shadow.camera);
 scene.add(ajudante4);
 */
 // Luzes dos postes
-const pointLight1 = new THREE.PointLight(0xf5d784,1.2,1000);
+const pointLight1 = new THREE.PointLight(0xEDEDD5,0.5,1000);
 pointLight1.castShadow = true;
 pointLight1.position.set(2.3,16,0);
 scene.add(pointLight1);
 
 
-const pointLight2 = new THREE.PointLight(0xf5d784,1.2,1000);
+const pointLight2 = new THREE.PointLight(0xEDEDD5,0.5,1000);
 pointLight2.castShadow = true;
 pointLight2.position.set(-2.3,16,0);
 scene.add(pointLight2);
@@ -394,6 +407,14 @@ function animacao() {
   requestAnimationFrame(animacao);
   esfera.rotation.y +=0.2;
   esfera.rotation.x +=0.1;
+  if (directionalLight.position.y > -50){
+    directionalLight.position.y -= 0.1;  
+  }
+  if (directionalLight.position.x < 100 ){
+    directionalLight.position.x += 0.05;
+    directionalLight.position.z += 0.05;
+  }
+  
   var delta = clock.getDelta(); // clock is an instance of THREE.Clock
   if ( dogmixer ) dogmixer.update( delta );
   renderer.render(scene,camera);
