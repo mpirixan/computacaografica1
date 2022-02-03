@@ -16,15 +16,13 @@
   <script src="/js/GLTFLoader.js"></script>
   <script src="/js/OrbitControls.js"></script>
   <script >
-// função de inicialização
+
 // Cena
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('lightblue');
 
 // Camera
-//const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const camera = new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,1,5000);
-//camera.rotation.y = 45/180*Math.PI;
 camera.position.x = 50;
 camera.position.y = 65;
 camera.position.z = 50;
@@ -57,11 +55,6 @@ const gltfLoader = new THREE.GLTFLoader();
 
 // Luzes
 
-// Luz ambiente para todo cenário
-//var hLight = new THREE.AmbientLight(new THREE.Color(0xFFFFFF), 0.1);
-//scene.add(hLight);
-//hLight.castShadow = false;
-
 // Luz Direcional
 var directionalLight = new THREE.DirectionalLight(new THREE.Color(0xFFFFFF), 1);
 directionalLight.target.position.set(0,1,-5);
@@ -76,27 +69,7 @@ scene.add(directionalLight);
 scene.add(ajudante3);
 var ajudante4 = new THREE.CameraHelper(directionalLight.shadow.camera);
 scene.add(ajudante4);
-//var ajudante4 = new THREE.CameraHelper(direcLight.shadow.camera);
-//scene.add(ajudante4);
-// Luz de ponto
-/*
-var spotLight = new THREE.SpotLight(new THREE.Color(0xFFFFFF), 1);
-spotLight.castShadow = true;
-spotLight.target.position.set(0,0,0);
-spotLight.position.set(50,30,10);
-scene.add(spotLight);
-scene.add(spotLight.target);
-spotLight.shadow.camera.zoom = 0.1;
-spotLight.shadow.mapSize.width = 2048;
-spotLight.shadow.mapSize.height = 2048;
 
-
-var ajudante3 = new THREE.PointLightHelper(spotLight);
-scene.add(ajudante3);
-
-var ajudante4 = new THREE.CameraHelper(spotLight.shadow.camera);
-scene.add(ajudante4);
-*/
 // Luzes dos postes
 const pointLight1 = new THREE.PointLight(0xEDEDD5,0.5,1000);
 pointLight1.castShadow = true;
@@ -125,15 +98,6 @@ pointLight2.shadow.camera.near = 0.5; // default
 pointLight2.shadow.camera.far = 10; // default
 pointLight2.shadow.focus = 1; // default
 
-/*
-light.shadow.camera.zoom = 0.1;
-light.shadow.mapSize.width = 2048;
-light.shadow.mapSize.height = 2048;
-*/
-//light.shadow.mapSize.width = 1024;
-//light.shadow.mapSize.height = 1024;
-//scene.add(light);
-
 // Ajudante de Luzes
 var ajudante = new THREE.PointLightHelper(pointLight1);
 scene.add(ajudante);
@@ -141,16 +105,12 @@ scene.add(ajudante);
 var ajudante2 = new THREE.PointLightHelper(pointLight2);
 scene.add(ajudante2);
 
-
-//var ajudante3 = new THREE.CameraHelper(spotLight.shadow.camera);
-//scene.add(ajudante2);
-
 // Ajudante de direção x,y,z
 const axesHelper = new THREE.AxesHelper( 70);
 scene.add( axesHelper );
 
-// Funções
-//function init(){
+
+
 // Grama
 //function CriarGrama(){
   var g = new THREE.PlaneGeometry(80,80);
@@ -173,12 +133,6 @@ scene.add( axesHelper );
 //Circulo Central
 //function CriarCentro(){
   var geometria = new THREE.CircleGeometry(10,128);
-  //var t = loader.load('../assets/street+asphalt-1024x1024.png');
-  //t.wrapS = THREE.RepeatWrapping;
-  //t.wrapT = THREE.RepeatWrapping;
-  //t.magFilter = THREE.NearestFilter;
-  //t.repeat.set(12,12);
-  
   var material = new THREE.MeshStandardMaterial({color: 0x422008});
   var pista = new THREE.Mesh(geometria, material);
   pista.rotation.x = Math.PI * -.5;
@@ -208,8 +162,7 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
+;
 });
 
 //}
@@ -230,8 +183,7 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
+
 });
 //function Arvore33(){
   gltfLoader.load('/assets/lowpoly_tree/scene.gltf', function(gltf){
@@ -250,8 +202,7 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
+
 });
 
 //}
@@ -273,8 +224,7 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
+
 });
 //}
 //function Banco2(){
@@ -296,8 +246,7 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
+
 });
 //}
 //function Poste(){
@@ -317,8 +266,6 @@ scene.add( axesHelper );
 	gltf.scenes; // Array<THREE.Group>
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
-  //renderer.render(scene,camera);
-  //animacao();
 });
 //}
 
@@ -356,57 +303,30 @@ gltf.receiveShadow = true;
 	gltf.cameras; // Array<THREE.Camera>
 	gltf.asset;
   });  
-  //renderer.render(scene,camera);
-  //animacao();
+
 //}
-/*
-function dumpObject(obj, lines = [], isLast = true, prefix = '') {
-  const localPrefix = isLast ? '└─' : '├─';
-  lines.push(`${prefix}${prefix ? localPrefix : ''}${obj.name || '*no-name*'} [${obj.type}]`);
-  const newPrefix = prefix + (isLast ? '  ' : '│ ');
-  const lastNdx = obj.children.length - 1;
-  obj.children.forEach((child, ndx) => {
-    const isLast = ndx === lastNdx;
-    dumpObject(child, lines, isLast, newPrefix);
-  });
-  return lines;
-}
-*/
 //function Bola(){
 geometria = new THREE.SphereGeometry(1,25,25);
 material = new THREE.MeshPhongMaterial({map: textureLoader.load('../assets/voleytexture.jpg')});
 
 var esfera = new THREE.Mesh(geometria, material);
 //esfera.scale.set(0.5,0.);
-esfera.position.set(-10,12,7);    
+esfera.position.set(10,1.2,7);    
 esfera.castShadow = true;
 esfera.receiveShadow = true;
 scene.add(esfera);
 
+var esfera2 = new THREE.Mesh(geometria, material);
+//esfera.scale.set(0.5,0.);
+esfera2.position.set(-15,1.2,20);    
+esfera2.castShadow = true;
+esfera2.receiveShadow = true;
+scene.add(esfera2);
 
-gltfLoader.load('/assets/volley-ball_player/scene.gltf', function(gltf){
-  var jogador = gltf.scene.children[0];
-  jogador.position.set(-9.2,1.2,5);
-  jogador.scale.set(0.05,0.05,0.05);
-  scene.add(gltf.scene);
-  gltf.scene.traverse((obj) => {
-      if (obj.castShadow !== undefined) {
-        obj.castShadow = true;
-        obj.receiveShadow = true;
-      }
-    });
-  gltf.scene.receiveShadow =true;
-  gltf.animations; // Array<THREE.AnimationClip>
-	gltf.scene; // THREE.Group
-	gltf.scenes; // Array<THREE.Group>
-	gltf.cameras; // Array<THREE.Camera>
-	gltf.asset;
-});
 //}
 function animacao() {
   requestAnimationFrame(animacao);
-  esfera.rotation.y +=0.2;
-  esfera.rotation.x +=0.1;
+
   if (directionalLight.position.y > -50){
     directionalLight.position.y -= 0.1;  
   }
@@ -414,14 +334,22 @@ function animacao() {
     directionalLight.position.x += 0.05;
     directionalLight.position.z += 0.05;
   }
-  
+  if (esfera.position.x >= -12 ){
+      esfera.position.x -= 0.06;
+      esfera.rotation.y +=0.2;
+      esfera.rotation.x +=0.1;
+  }
+  if (esfera2.position.z >= -12){
+
+      esfera2.position.x -= 0.01;
+      esfera2.position.z -= 0.07;
+      esfera2.rotation.y +=0.2;
+      esfera2.rotation.x +=0.1;
+  }
   var delta = clock.getDelta(); // clock is an instance of THREE.Clock
   if ( dogmixer ) dogmixer.update( delta );
   renderer.render(scene,camera);
   
-  
-  
-  //controlador.update();
   
   
 }
